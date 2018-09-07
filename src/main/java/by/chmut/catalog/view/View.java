@@ -14,8 +14,12 @@ public class View {
     }
 
     public static void showResult(Set<News> result) {
-        if (result != null) {
+        if (!result.isEmpty()) {
             for (News news : result) {
+                if (news.getCategoryName().equals("Error") & news.getNameNews().equals("") ) {
+                    System.out.println("\u001B[31mAttention!\nThere is no such command!!!");
+                    break;
+                }
                 System.out.println(news);
             }
         }

@@ -13,14 +13,6 @@ public class CommandDirector {
     CommandDirector() {}
 
     public CommandDirector(ReadCommand readCommand, SearchCommand searchCommand, AddCommand addCommand, SaveCommand saveCommand) {
-
-//        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-
-//        ReadCommand readCommand = context.getBean("readCommand",ReadCommand.class);
-//        SearchCommand searchCommand = context.getBean("searchCommand",SearchCommand.class);
-//        AddCommand addCommand = context.getBean("addCommand",AddCommand.class);
-//        SaveCommand saveCommand = context.getBean("saveCommand",SaveCommand.class);
-
         commands.put("read", readCommand);
         commands.put("search", searchCommand);
         commands.put("add", addCommand);
@@ -29,10 +21,14 @@ public class CommandDirector {
     }
 
     public Command getCommand(String commandName) {
+
         Command command = commands.get(commandName);
+
         if (command == null) {
-            command = new ErrorCommand();
+
+            command = commands.get("error");
         }
+
         return command;
     }
 }

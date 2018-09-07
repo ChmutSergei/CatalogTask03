@@ -6,10 +6,14 @@ import by.chmut.catalog.bean.criteria.Criteria;
 import by.chmut.catalog.bean.criteria.SearchCriteria;
 import by.chmut.catalog.controller.Command;
 
+import by.chmut.catalog.controller.LoggerEx;
 import by.chmut.catalog.service.Service;
+import by.chmut.catalog.service.ServiceException;
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -31,8 +35,6 @@ public class SearchCommand implements Command {
     public void setService(Service service) {
         this.service = service;
     }
-    //    Service service = ReadCommand.service ;
-
 
     private Criteria<SearchCriteria.Category> categoryCriteria = new Criteria<>(SearchCriteria.Category.class);
     private Criteria<SearchCriteria.Subcategory> subcategoryCriteria = new Criteria<>(SearchCriteria.Subcategory.class);
@@ -43,11 +45,12 @@ public class SearchCommand implements Command {
 
         List<Criteria> allCriteria = getParamsCriteria(request);
 
-//        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-
-//        Service service = context.getBean("service",Service.class);
-
-        Set<News> result = service.find(allCriteria);
+        Set<News> result = Collections.emptySet();
+        try {
+            result = service.find(allCriteria);
+        } catch (ServiceException e) {
+            LoggerEx.logger.error(e.getMessage(),e);
+        }
 
         return result;
     }
@@ -74,7 +77,9 @@ public class SearchCommand implements Command {
     }
 
 
+
     private void addCriteria(String parameters) {
+
         String[] params = parameters.split("=", 2);
 
         String paramOnSearch = params[0].trim();

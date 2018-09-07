@@ -2,8 +2,11 @@ package by.chmut.catalog.controller.command;
 
 import by.chmut.catalog.bean.News;
 import by.chmut.catalog.controller.Command;
+import by.chmut.catalog.controller.LoggerEx;
 import by.chmut.catalog.service.Service;
+import by.chmut.catalog.service.ServiceException;
 
+import java.util.Collections;
 import java.util.Set;
 
 public class SaveCommand implements Command {
@@ -21,8 +24,12 @@ public class SaveCommand implements Command {
     @Override
     public Set<News> execute(String request) {
 
-        service.save();
+        try {
+            service.save();
+        } catch (ServiceException e) {
+            LoggerEx.logger.error(e.getMessage(),e);
+        }
 
-        return null;
+        return Collections.emptySet();
     }
 }

@@ -9,11 +9,11 @@ import java.util.Set;
 
 public interface Service {
 
-    <E> Set<News> find(List<Criteria> allCriteriaToSearch);
+    <E> Set<News> find(List<Criteria> allCriteriaToSearch) throws ServiceException;
 
     void addNews(News news);
 
-    void load();
+    void load() throws ServiceException;
 
-    void save();
+    void save() throws ServiceException;
 }

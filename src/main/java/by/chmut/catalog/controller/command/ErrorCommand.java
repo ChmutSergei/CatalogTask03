@@ -12,7 +12,7 @@ public class ErrorCommand implements Command {
 
     public Set<News> execute(String request) {
 
-        String error = "Incorrect command or no data in the command! Try again!";
+        String error = "Error";
 
         News news = new News(error,"","","","","");
 

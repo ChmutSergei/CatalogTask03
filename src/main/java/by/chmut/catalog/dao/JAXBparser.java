@@ -11,7 +11,7 @@ import javax.xml.bind.Unmarshaller;
 import java.io.File;
 import java.util.ResourceBundle;
 
-class JAXBparser {
+class JAXBparser  {
 
     private final String bundleName = "JAXB";
 
