@@ -12,9 +12,11 @@ import java.util.Set;
 
 public class Main {
 
-    private static final Controller controller = new Controller();
-
     public static void main(String[] args) {
+
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+
+        Controller controller = context.getBean("controller", Controller.class);
 
 
         controller.doAction("read-name=All");

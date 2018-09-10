@@ -73,11 +73,18 @@
     <bean id="commandDirector"
           class="by.chmut.catalog.controller.CommandDirector">
 
-        <!-- set up constructor injection -->
+         <!--set up constructor injection -->
         <constructor-arg ref="readCommand" />
         <constructor-arg ref="searchCommand" />
         <constructor-arg ref="addCommand" />
         <constructor-arg ref="saveCommand" />
+    </bean>
+
+    <bean id="controller"
+            class="by.chmut.catalog.controller.Controller">
+
+        <!-- set up setter injection -->
+            <property name="commandDirector" ref="commandDirector" />
     </bean>
 
 

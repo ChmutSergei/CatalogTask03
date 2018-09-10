@@ -1,18 +1,20 @@
 package by.chmut.catalog.controller;
 
 import by.chmut.catalog.bean.News;
-import by.chmut.catalog.service.ServiceException;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import java.util.Collections;
 import java.util.Set;
 
 public class Controller{
 
-    ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+    CommandDirector commandDirector;
 
-    CommandDirector commandDirector = context.getBean("commandDirector", CommandDirector.class);
+    public CommandDirector getCommandDirector() {
+        return commandDirector;
+    }
 
+    public void setCommandDirector(CommandDirector commandDirector) {
+        this.commandDirector = commandDirector;
+    }
 
     public Set<News> doAction(String request) {
         int index = getIndexForParse(request.trim());
